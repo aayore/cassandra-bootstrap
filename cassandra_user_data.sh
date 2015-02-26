@@ -26,7 +26,8 @@ ln -s /opt/apache-cassandra-2.1.3/ /opt/cassandra
 ls /opt/cassandra
 
 for ip in $(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
-	do  sed -i -- "s/^listen_address:\ 127.0.0.1/listen_address:\ $ip/" /opt/cassandra/conf/cassandra.yaml
+	do sed -i -- "s/^listen_address:\ 127.0.0.1/listen_address:\ $ip/" /opt/cassandra/conf/cassandra.yaml
+	sed -i -- "s/^listen_address:\ localhost/listen_address:\ $ip/" /opt/cassandra/conf/cassandra.yaml
 done
 
 echo "Starting Cassandra..."
